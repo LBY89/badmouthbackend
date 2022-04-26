@@ -26,7 +26,7 @@ commentsRouter.get('/', (request, response) => {
 
 commentsRouter.delete('/:id', (request, response, next) => {
   Comment.findByIdAndRemove(request.params.id)
-    .then(result => {
+    .then(() => {
       response.status(204).end()
     })
     .catch(error => next(error))
@@ -35,11 +35,6 @@ commentsRouter.delete('/:id', (request, response, next) => {
 commentsRouter.put('/:id', (request, response, next) => {
   const { content, important} = request.body
 
-  //   const comment = {
-  //     content: body.content,
-  //     important: body.important,
-  //   }
-  // add {new: true} to make sure update is done
   Comment.findByIdAndUpdate(
     request.params.id, 
     { content, important },
@@ -51,7 +46,8 @@ commentsRouter.put('/:id', (request, response, next) => {
     .catch(error => next(error))
 })
 
-// A guest user can comment? If not, we need to add the token extractor here
+// Need to add error handling for async await
+// eslint-disable-next-line no-unused-vars
 commentsRouter.post('/', async (request, response, next) => {
   const body = request.body
   console.log('body', body.content)
