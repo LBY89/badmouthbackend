@@ -19,12 +19,11 @@ jobs:
       - name: npm install
         run: npm install
       - name: lint
-        run: npm run lint
+        run: npm run eslint
       - name: integration tests
-        run: npm test
+        run: npm run test
   tag_release:
     if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ', '), '#skip') }}
-    needs: [run_deployment]
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
