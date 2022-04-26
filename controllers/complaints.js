@@ -19,7 +19,7 @@ complaintsRouter.get('/:id', (request, response, next) => {
 
 complaintsRouter.get('/', async (request, response) => {
     const complaints = await Complaint
-        .find({}).populate('user', { firstname: 1, lastname: 1, email: 1 })
+        .find({}).populate('user', { firstname: 1, lastname: 1, email: 1 }).populate('comments', {content:1, complaintId: 1, userId: 1})
 
     response.json(complaints)
   
