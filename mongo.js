@@ -30,7 +30,7 @@ const complaint = new Complaint({
 })
 
 complaint.save().then(result => {
-  console.log('result', result);
+  console.log('result', result)
     
   console.log('complaint saved!')
   mongoose.connection.close()
