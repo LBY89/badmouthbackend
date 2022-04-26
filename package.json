@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js",
-    "dev": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint ."
+    "start": "NODE_ENV=production node index.js",
+    "dev": "NODE_ENV=development nodemon index.js",
+    "test": "NODE_ENV=test jest --verbose --runInBand",
+    "eslint": "eslint ."
   },
   "author": "LBY89",
   "license": "ISC",
@@ -21,6 +21,8 @@
   },
   "devDependencies": {
     "eslint": "^8.13.0",
-    "nodemon": "^2.0.15"
+    "jest": "^28.0.1",
+    "nodemon": "^2.0.15",
+    "supertest": "^6.2.2"
   }
 }
