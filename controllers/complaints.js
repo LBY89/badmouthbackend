@@ -73,7 +73,6 @@ complaintsRouter.post('/', async (request, response) => {
 
     const complaint = new Complaint( {
         content: body.content,
-        important: body.important || false,
         date: new Date(),
         user: user._id
     })

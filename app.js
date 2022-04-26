@@ -26,7 +26,7 @@ app.use(express.json())
 app.use(middleware.requestLogger)
 
 app.use('/api/complaints', complaintsRouter)
-app.use('/api/comments', commentsRouter)
+app.use('/api/complaints/:id/comments', commentsRouter)
 app.use('/api/users', usersRouter)
 app.use('/api/login', loginRouter)
 
