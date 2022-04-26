@@ -1,0 +1,8 @@
+POST http://localhost:3001/api/complaints/6265422aa0ef64ccb047361d/comments
+Content-Type: application/json
+
+{
+  "content": "bad banana",
+  "complaintId": "6265422aa0ef64ccb047361d",
+  "userId": "62654119a0ef64ccb0473602"
+}

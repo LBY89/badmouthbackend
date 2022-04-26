@@ -1,0 +1,8 @@
+POST http://localhost:3001/api/complaints
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InBhYmxvQGdtYWlsLmNvbSIsImlkIjoiNjI2NTQxMTlhMGVmNjRjY2IwNDczNjAyIiwiaWF0IjoxNjUwOTYwOTIyLCJleHAiOjE2NTA5NjQ1MjJ9._TSQbgnT3QWWjm0CCWV1la9BqKtrxQslSBZoIKED9iU
+
+{
+  "content": "rest complaint with date",
+  "user": "62654119a0ef64ccb0473602"
+}

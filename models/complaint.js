@@ -15,9 +15,14 @@ const complaintSchema = new mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
-    }
+    },
+    comments: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Comment'
+        }
+    ]
 })
-
 
 complaintSchema.set('toJSON', {
     transform: (document, returnedObject) => {

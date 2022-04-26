@@ -1,0 +1,1 @@
+GET http://localhost:3001/api/complaints/6265422aa0ef64ccb047361d/comments
