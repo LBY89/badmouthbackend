@@ -45,4 +45,4 @@ jobs:
       - name: tests
         run: npm test
         env:
-          TEST_MONGODB_URI: mongodb://test:password@localhost:27017/test
+          TEST_MONGODB_URI: mongodb://test:password@localhost:27017/test?authSource=admin
