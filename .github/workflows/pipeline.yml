@@ -9,28 +9,40 @@ on:
     types: [opened, synchronize]
 
 jobs:
-  linting_and_testing:
-    runs-on: ubuntu-20.04
+  # Run tests
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    services:
+      mongo:
+        image: mongo
+        env:
+          MONGO_INITDB_ROOT_USERNAME: test
+          MONGO_INITDB_ROOT_PASSWORD: password
+          MONGO_INITDB_DATABASE: test
+        options: >-
+          --health-cmd mongo
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 27017:27017
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v2
+      - name: Git checkout 
+        uses: actions/checkout@v3
+
+      - name: Use Node.js
+        uses: actions/setup-node@v2
         with:
           node-version: '16'
+
       - name: npm install
         run: npm install
+
       - name: lint
         run: npm run eslint
-      - name: integration tests
-        run: npm run test
-  tag_release:
-    if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ', '), '#skip') }}
-    runs-on: ubuntu-20.04
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          node-version: '16'
-      - name: Bump version and push tag
-        uses: anothrNick/github-tag-action@1.36.0
+
+      - name: tests
+        run: npm test
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          DEFAULT_BUMP: patch
+          TEST_MONGODB_URI: mongodb://test:password@localhost:27017/test
