@@ -11,6 +11,12 @@ const userSchema = new mongoose.Schema({
             ref: 'Complaint'
         }
     ],
+    images: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Image'
+        }
+    ],
 })
 
 userSchema.set('toJSON', {
