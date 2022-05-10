@@ -11,7 +11,6 @@ const complaintSchema = new mongoose.Schema({
         type: Date,
         required: true
     },
-    important: Boolean,
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
@@ -21,7 +20,8 @@ const complaintSchema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Comment'
         }
-    ]
+    ],
+    image: { type: String }
 })
 
 complaintSchema.set('toJSON', {
