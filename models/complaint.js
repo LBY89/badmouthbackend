@@ -7,6 +7,9 @@ const complaintSchema = new mongoose.Schema({
         minLength: 5,
         required: true
     },
+    title: {
+        type: String
+    },
     date: {
         type: Date,
         required: true

@@ -83,6 +83,7 @@ complaintsRouter.post('/', upload.single('image'), async (request, response) => 
     const user = await User.findById(decodedToken.id)
 
     const complaint = new Complaint( {
+        title: body.title,
         content: body.content,
         date: new Date(),
         user: user._id,
