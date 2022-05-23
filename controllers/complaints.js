@@ -72,9 +72,8 @@ const getTokenFrom = request => {
 }
 
 complaintsRouter.post('/', upload.single('image'), async (request, response) => {
-    console.log(request.file)
+    console.log('request.file', request.file)
     const body = request.body
-
     const token = getTokenFrom(request)
     const decodedToken = jwt.verify(token, process.env.SECRET)
     if (!decodedToken.id) {
