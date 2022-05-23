@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 
 const userSchema = new mongoose.Schema({
+
   firstname: String,
   lastname: String,
   email: String,
@@ -11,6 +12,7 @@ const userSchema = new mongoose.Schema({
       ref: 'Complaint'
     }
   ],
+
 })
 
 userSchema.set('toJSON', {

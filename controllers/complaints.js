@@ -2,7 +2,17 @@ const complaintsRouter = require('express').Router()
 const User = require('../models/user')
 const Complaint = require('../models/complaint')
 const jwt = require('jsonwebtoken')
+const multer = require('multer')
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, './uploads/')
+    },
+    filename: (req, file, cb) => {
+        cb(null, new Date().toISOString() + '-' + file.originalname)
+    }
+})
 
+const upload = multer({ storage: storage })
 
 complaintsRouter.get('/:id', (request, response, next) => {
   Complaint.findById(request.params.id).then(complaint => {
@@ -18,6 +28,7 @@ complaintsRouter.get('/:id', (request, response, next) => {
 })
 
 complaintsRouter.get('/', async (request, response) => {
+
   const complaints = await Complaint
     .find({}).populate('user', { firstname: 1, lastname: 1, email: 1 }).populate('comments', {content:1, complaintId: 1, userId: 1})
 
@@ -59,6 +70,7 @@ const getTokenFrom = request => {
   }
   return null
 }
+
 
 complaintsRouter.post('/', async (request, response) => {
   const body = request.body

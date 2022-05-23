@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 
 
 const complaintSchema = new mongoose.Schema({
+
   content: {
     type: String,
     minLength: 5,
@@ -22,6 +23,7 @@ const complaintSchema = new mongoose.Schema({
       ref: 'Comment'
     }
   ]
+
 })
 
 complaintSchema.set('toJSON', {
