@@ -44,23 +44,19 @@ complaintsRouter.delete('/:id', (request, response, next) => {
         .catch(error => next(error))
 })
 
-complaintsRouter.put('/:id', (request, response, next) => {
-    const { content, important} = request.body
+complaintsRouter.put('/:id', async (request, response) => {
+    const { content, title} = request.body
 
-    //   const complaint = {
-    //     content: body.content,
-    //     important: body.important,
-    //   }
-    // add {new: true} to make sure update is done
-    Complaint.findByIdAndUpdate(
+    const updatedComplaint = await Complaint.findByIdAndUpdate(
         request.params.id, 
-        { content, important },
+        { content, title },
         { new: true, runValidators: true, context: 'query' }
     )
-        .then(updatedComplaint => {
-            response.json(updatedComplaint)
-        })
-        .catch(error => next(error))
+
+    await updatedComplaint.populate('user', { firstname: 1, lastname: 1, email: 1, id: 1 })
+    
+    response.json(updatedComplaint)
+    
 })
 
 const getTokenFrom = request => {
@@ -90,6 +86,7 @@ complaintsRouter.post('/', upload.single('image'), async (request, response) => 
     })
 
     const savedComplaint = await complaint.save()
+    await savedComplaint.populate('user', { firstname: 1, lastname: 1, email: 1, id: 1 })
     user.complaints = user.complaints.concat(savedComplaint._id)
     await user.save()
     
