@@ -32,7 +32,7 @@ app.use(middleware.requestLogger)
 
 
 
-app.use('/api/uploads', express.static('uploads'), complaintsRouter)
+app.use('/api/uploads', express.static('uploads'))//, complaintsRouter)
 app.use('/api/complaints', complaintsRouter)
 app.use('/api/complaints/:id/comments', commentsRouter)
 app.use('/api/users', usersRouter)
