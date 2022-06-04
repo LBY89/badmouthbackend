@@ -28,8 +28,6 @@ loginRouter.post('/', async (request, response) => {
         { expiresIn: 60*60 }
     )
 
-
-
     response
         .status(200)
         .send({ token, id: user._id, email: user.email, firstname: user.firstname, lastname: user.lastname })
