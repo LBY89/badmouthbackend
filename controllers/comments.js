@@ -47,15 +47,14 @@ commentsRouter.put('/:id', (request, response, next) => {
 })
 
 commentsRouter.post('/', async (request, response, next) => {
-    const body = request.body
-    const id = body.complaintId
+    const {id, content, userId} = request.body
     const complaint = await Complaint.findById(id)
 
-    const comment = new Comment( {
-        content: body.content,
+    const comment = new Comment({
+        content,
         date: new Date(),
-        complaintId: body.complaintId,
-        userId: body.userId
+        complaintId: id,
+        userId
     })
     
     const savedComment = await comment.save()
