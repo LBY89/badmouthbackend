@@ -4,10 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js",
+    "start": "node index.js",
     "dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "build:ui": "rm -rf build && cd ../badmouth/ && npm run build && cp -r build ../bdbackend",
+    "deploy": "git push heroku master",
+    "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && npm run deploy",
+    "logs:prod": "heroku logs --tail"
   },
   "author": "LBY89",
   "license": "ISC",
@@ -17,7 +21,9 @@
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
+    "express-history-api-fallback": "^2.2.1",
     "jsonwebtoken": "^8.5.1",
+    "mongo-image-converter": "^1.0.2",
     "mongoose": "^6.2.11",
     "multer": "^1.4.4"
   },
